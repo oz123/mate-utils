@@ -1321,6 +1321,7 @@ main (int argc, char *argv[])
   gchar *border_effect_arg = NULL;
   gboolean version_arg = FALSE;
   guint delay_arg = 0;
+  gchar *file_arg = NULL;
   GError *error = NULL;
 
   const GOptionEntry entries[] = {
@@ -1331,6 +1332,7 @@ main (int argc, char *argv[])
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay_arg, N_("Take screenshot after specified delay [in seconds]"), N_("seconds") },
     { "border-effect", 'e', 0, G_OPTION_ARG_STRING, &border_effect_arg, N_("Effect to add to the border (shadow, border or none)"), N_("effect") },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive_arg, N_("Interactively set options"), NULL },
+    { "file", 'f', 0, G_OPTION_ARG_STRING, &file_arg, N_("Save screenshot directly to this file"), N_("filename") },
     { "version", 0, 0, G_OPTION_ARG_NONE, &version_arg, N_("Print version information and exit"), NULL },
     { NULL },
   };
@@ -1398,7 +1400,11 @@ main (int argc, char *argv[])
 
   if (delay_arg > 0)
     delay = delay_arg;
+  
 
+  if (file_arg) 
+	 g_print ("%s\n", file_arg);
+  
   /* interactive mode overrides everything */
   if (interactive_arg)
     {
