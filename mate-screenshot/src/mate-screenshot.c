@@ -1358,7 +1358,11 @@ main (int argc, char *argv[])
   g_option_context_free (context);
  
   if (version_arg) {
-    g_print ("%s %s\n", g_get_application_name (), VERSION);
+#if GTK_CHECK_VERSION (3, 0, 0)
+    g_print ("%s %s %s\n", g_get_application_name (), VERSION, "Gtk+3");
+#else
+    g_print ("%s %s %s\n", g_get_application_name (), VERSION, "Gtk+2");
+#endif
     exit (EXIT_SUCCESS);
   }
 
